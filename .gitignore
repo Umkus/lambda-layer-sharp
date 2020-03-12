@@ -1,0 +1,7 @@
+.idea/
+coverage
+node_modules/
+dist/*
+!dist/sharp-layer.zip
+*.iml
+.DS_Store
