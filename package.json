@@ -20,6 +20,6 @@
   "scripts": {
     "deps": "docker run -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x npm --no-optional --no-audit --progress=false ci",
     "build": "docker run -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x node ./node_modules/webpack/bin/webpack.js",
-    "install": "aws lambda publish-layer-version --layer-name sharp --description \"Sharp layer\" --license-info \"Apache License 2.0\" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs12.x"
+    "upload": "aws lambda publish-layer-version --layer-name sharp --description \"Sharp layer\" --license-info \"Apache License 2.0\" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs12.x"
   }
 }
