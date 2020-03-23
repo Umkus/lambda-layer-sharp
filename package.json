@@ -11,15 +11,16 @@
     "copy-webpack-plugin": "^5.1.1"
   },
   "dependencies": {
-    "sharp": "0.25.1"
+    "sharp": "0.25.2"
   },
   "engines": {
     "node": ">=12.14.0"
   },
   "author": "Mykhailo Gorianskyi <goreanski@gmail.com>",
   "scripts": {
-    "deps": "docker run -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x npm --no-optional --no-audit --progress=false ci",
+    "deps": "docker run -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x npm --no-optional --no-audit --progress=false install",
     "build": "docker run -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x node ./node_modules/webpack/bin/webpack.js",
+    "smoke-test": "docker run -w /var/task/dist/nodejs -v \"$PWD\":/var/task lambci/lambda:build-nodejs12.x node -e \"console.log(require('sharp'))\"",
     "upload": "aws lambda publish-layer-version --layer-name sharp --description \"Sharp layer\" --license-info \"Apache License 2.0\" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs12.x"
   }
 }
