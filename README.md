@@ -33,5 +33,5 @@ A built lambda zip file is available at [`dist/sharp-layer.zip`](./dist/sharp-la
        --layer-name sharp --description "Sharp layer" \
        --license-info "Apache License 2.0" \
        --zip-file fileb://dist/sharp-layer.zip \
-       --compatible-runtimes nodejs12
+       --compatible-runtimes nodejs12.x
     ```
