@@ -1,9 +1,10 @@
 # AWS Sharp layer
 This AWS lambda layer contains a pre-built [sharp](https://www.npmjs.com/package/sharp) npm library.
+It is optimized for the most frugal space usage possible.
 
-|Sharp version|Layer size|Zipped size|
+|Sharp version|Layer size (zipped)|Lambda space usage|
 |---|---|---|
-|[0.25.2](https://github.com/lovell/sharp/releases/tag/v0.25.2)|26MB|9.9MB|
+|[0.25.2](https://github.com/lovell/sharp/releases/tag/v0.25.2)|26MB (9.9MB)| 5% (out of 512MB)|
 
 # Getting
 A built lambda zip file is available at [`dist/sharp-layer.zip`](./dist/sharp-layer.zip).
