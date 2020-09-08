@@ -2,9 +2,9 @@
 This AWS lambda layer contains a pre-built [sharp](https://www.npmjs.com/package/sharp) npm library.
 It is optimized for the most frugal space usage possible.
 
-|Sharp version|Layer size (zipped)|Lambda space usage|
-|---|---|---|
-|[0.25.2](https://github.com/lovell/sharp/releases/tag/v0.25.2)|26MB (9.9MB)| 5% (out of 512MB)|
+|Sharp version| Layer size|
+|---|---|
+|[0.26.0](https://github.com/lovell/sharp/releases/tag/v0.26.0)|9.68MB|
 
 # Getting
 A pre-built layer zip file is available at [`dist/sharp-layer.zip`](./dist/sharp-layer.zip).
@@ -15,9 +15,7 @@ A pre-built layer zip file is available at [`dist/sharp-layer.zip`](./dist/sharp
 * Docker
 
 ## Steps
-The below commands are also available in the `scripts` section of `package.json`.
-
-1. Clone the repo:
+1. Clone the repo: 
     ```shell script
     git clone git@github.com:Umkus/lambda-layer-sharp.git
     cd lambda-layer-sharp/
@@ -36,10 +34,5 @@ The below commands are also available in the `scripts` section of `package.json`
     ```
 1. Import created layer into your AWS account:
     ```shell script
-    aws lambda publish-layer-version \
-       --layer-name sharp \
-       --description "Sharp layer" \
-       --license-info "Apache License 2.0" \
-       --zip-file fileb://dist/sharp-layer.zip \
-       --compatible-runtimes nodejs12.x
+    aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs12.x
     ```
