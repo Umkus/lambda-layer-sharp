@@ -35,7 +35,7 @@ module.exports = {
     })
   ],
   optimization: {
-    minimize: true,
+    minimize: false,
   },
   output: {
     filename: '[name].js',
