@@ -3,7 +3,7 @@ This AWS lambda layer contains a pre-built [sharp](https://www.npmjs.com/package
 It is optimized for the most frugal space usage possible.
 
 # Getting
-A pre-built layer zip file is available on the [Releases page](https://github.com/bubblydoo/lambda-layer-sharp/releases), alongside the size of the layer.
+A pre-built layer zip file is available on the [Releases page](../../releases), alongside the size of the layer.
 
 # Building
 
