@@ -35,7 +35,8 @@ module.exports = {
     })
   ],
   optimization: {
-    minimize: false,
+    // minimize will be enabled in Github Actions
+    minimize: process.env.NODE_ENV === 'production',
   },
   output: {
     filename: '[name].js',
