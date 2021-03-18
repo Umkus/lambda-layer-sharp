@@ -11,7 +11,7 @@
     "copy-webpack-plugin": "^6.1.0"
   },
   "dependencies": {
-    "sharp": "^0.27.0"
+    "sharp": "^0.27.2"
   },
   "engines": {
     "node": ">=12.14.0"
