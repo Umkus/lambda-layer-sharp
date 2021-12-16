@@ -3,69 +3,53 @@ name: Build Layer ZIP
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Read version
-      id: package_lock_json
-      run: |
-        content=$(cat ./package-lock.json)
-        content="${content//'%'/'%25'}"
-        content="${content//$'\n'/'%0A'}"
-        content="${content//$'\r'/'%0D'}"
-        echo "::set-output name=packageLockJson::$content"
-    - name: Variables
-      id: vars
-      run: |
-        sharp_version="${{ fromJSON(steps.package_lock_json.outputs.packageLockJson).dependencies.sharp.version }}"
-        echo "::set-output name=sharp_version::$sharp_version"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Read version
+        id: package_lock_json
+        run: |
+          content=$(cat ./package-lock.json)
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=packageLockJson::$content"
+      - name: Variables
+        id: vars
+        run: |
+          sharp_version="${{ fromJSON(steps.package_lock_json.outputs.packageLockJson).dependencies.sharp.version }}"
+          echo "::set-output name=sharp_version::$sharp_version"
 
-        release_exists="true"
-        git show-ref --tags --quiet --verify -- "refs/tags/$sharp_version" || release_exists="false"
-        echo "::set-output name=release_exists::$release_exists"
-    - name: Build
-      id: docker_build
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./Dockerfile
-        tags: amazon-linux-sharp-layer:dev
-    - name: Copy artifacts
-      run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: sharp-lambda-layer.zip
-        path: dist/sharp-layer.zip
-        if-no-files-found: error
-    - name: Create release
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && steps.vars.outputs.release_exists == 'false' }}
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.vars.outputs.sharp_version }}
-        release_name: Version ${{ steps.vars.outputs.sharp_version }}
-        prerelease: ${{ contains(steps.vars.outputs.sharp_version, '-') }}
-    - name: Upload release asset
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-      id: upload_release_asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/sharp-layer.zip
-        asset_name: sharp-lambda-layer.zip
-        asset_content_type: application/zip
+          release_exists="true"
+          git show-ref --tags --quiet --verify -- "refs/tags/$sharp_version" || release_exists="false"
+          echo "::set-output name=release_exists::$release_exists"
+      - name: Build
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: amazon-linux-sharp-layer:dev
+      - name: Copy artifacts
+        run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: sharp-lambda-layer.zip
+          path: dist/sharp-layer.zip
+          if-no-files-found: error
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.vars.outputs.sharp_version }}
+          files: dist/sharp-layer.zip
