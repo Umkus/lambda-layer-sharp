@@ -49,7 +49,7 @@ jobs:
         path: dist/sharp-layer.zip
         if-no-files-found: error
     - name: Create release
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && steps.vars.outputs.release_exists == 'false' }}
       id: create_release
       uses: actions/create-release@v1
       env:
