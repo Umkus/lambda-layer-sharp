@@ -40,8 +40,8 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: amazon-linux-sharp-layer:dev
-      - name: Copy artifacts
-        run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
+#      - name: Copy artifacts
+#        run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
       - name: Create release
         uses: svenstaro/upload-release-action@v2
         with:
