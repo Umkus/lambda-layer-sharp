@@ -45,6 +45,7 @@ jobs:
       - name: Create release
         uses: svenstaro/upload-release-action@v2
         with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.vars.outputs.sharp_version }}
           file: dist/sharp-layer.zip
           overwrite: true
