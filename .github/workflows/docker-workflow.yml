@@ -42,14 +42,9 @@ jobs:
           tags: amazon-linux-sharp-layer:dev
       - name: Copy artifacts
         run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: sharp-lambda-layer.zip
-          path: dist/sharp-layer.zip
-          if-no-files-found: error
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: ${{ steps.vars.outputs.sharp_version }}
-          files: dist/sharp-layer.zip
+          tag: ${{ steps.vars.outputs.sharp_version }}
+          file: dist/sharp-layer.zip
+          overwrite: true
