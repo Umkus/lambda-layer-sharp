@@ -44,6 +44,6 @@ module.exports = {
     libraryTarget: 'commonjs2',
   },
   externals: {
-    './sharp-linux-x64.node': './sharp-linux-x64.node',
+    './sharp-linux-x64.node': './build/Release/sharp-linux-x64.node',
   },
 };
