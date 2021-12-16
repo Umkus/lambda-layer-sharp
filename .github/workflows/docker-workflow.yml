@@ -49,7 +49,7 @@ jobs:
         path: dist/sharp-layer.zip
         if-no-files-found: error
     - name: Create release
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && steps.vars.outputs.release_exists == 'false' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -59,7 +59,7 @@ jobs:
         release_name: Version ${{ steps.vars.outputs.sharp_version }}
         prerelease: ${{ contains(steps.vars.outputs.sharp_version, '-') }}
     - name: Upload release asset
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && steps.vars.outputs.release_exists == 'false' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       id: upload_release_asset
       uses: actions/upload-release-asset@v1
       env:
