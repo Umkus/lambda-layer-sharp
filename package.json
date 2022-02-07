@@ -12,7 +12,7 @@
     "zip-webpack-plugin": "^4.0.1"
   },
   "dependencies": {
-    "sharp": "^0.29.3"
+    "sharp": "^0.30.0"
   },
   "engines": {
     "node": ">=14"
