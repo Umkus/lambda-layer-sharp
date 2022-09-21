@@ -4,15 +4,8 @@
   "repository": "git@github.com:Umkus/lambda-layer-sharp.git",
   "license": "Apache License 2.0",
   "module": "lambda-layer-sharp",
-  "devDependencies": {
-    "webpack-node-externals": "^3.0.0",
-    "copy-webpack-plugin": "^6.4.1",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1",
-    "zip-webpack-plugin": "^4.0.1"
-  },
   "dependencies": {
-    "sharp": "^0.30.0"
+    "sharp": "^0.31.0"
   },
   "engines": {
     "node": ">=14"
