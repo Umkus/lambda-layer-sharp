@@ -1,4 +1,4 @@
-name: Build Layer ZIP
+name: Build and deploy Sharp Lambda Layer
 
 on:
   push:
@@ -7,8 +7,6 @@ on:
   pull_request:
     branches:
       - master
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   build:
