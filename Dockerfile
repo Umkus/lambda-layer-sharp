@@ -15,7 +15,7 @@ RUN node -v && npm -v
 WORKDIR /build
 COPY * ./
 
-RUN npm --no-optional --no-audit --progress=false install
+RUN npm --no-optional --no-audit --progress=false --production install
 
 # Confirm sharp installation
 RUN node -e "console.log(require('sharp'))"
