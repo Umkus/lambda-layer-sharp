@@ -13,7 +13,7 @@ A pre-built layer zip file is available on the [Releases page](../../releases), 
 ## Steps
 1. Clone the repo: 
     ```shell script
-    git clone git@github.com:Umkus/lambda-layer-sharp.git
+    git clone git@github.com:buildigo/lambda-layer-sharp.git
     cd lambda-layer-sharp/
     ```
 1. Create build image:
@@ -22,17 +22,15 @@ A pre-built layer zip file is available on the [Releases page](../../releases), 
    ```
 1. Install dependencies:
     ```shell script
-    docker run -v "$PWD":/var/task amazonlinux:nodejs-14 npm --no-optional --no-audit --progress=false install
+    docker run -v "$PWD":/var/task amazonlinux:nodejs-14 npm --no-optional --no-audit --progress=false --prod install
     ```
-1. Build the layer:
+1. Run and copy zip locally:
     ```shell script
-    docker run -v "$PWD":/var/task amazonlinux:nodejs-14 node ./node_modules/webpack/bin/webpack.js
+    docker run -v $PWD/dist:/dist amazonlinux:nodejs-14
     ```
-1. Perform a smoke-test:
-    ```shell script
-    docker run -w /var/task/dist/nodejs -v "$PWD":/var/task amazonlinux:nodejs-14 node -e "console.log(require('sharp'))"
-    ```
+   You should now have a `sharp-layer.zip` file in your local `dist` directory
 1. Import created layer into your AWS account:
     ```shell script
     aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs14.x
     ```
+   You now have a lambda layer published to your account that can be used with any lambda that requires sharp
