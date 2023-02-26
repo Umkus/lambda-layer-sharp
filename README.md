@@ -13,13 +13,13 @@ It also supports all currently supported AWS lambda node runtimes (>=`nodejs14.x
 A pre-built layer zip file is available on the [Releases page](../../releases).
 
 You can import it into your AWS account throught the Lambda console or with the following command:
-    ```shell script
-    aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x --compatible-architectures x86_64 arm64
-    ```
+```shell
+aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x --compatible-architectures x86_64 arm64
+```
 
 # Building
 Install dependencies (this will wipe your existing `node_modules/` directory):
-```shell script
+```shell
 npm ci --arch=x64 --platform=linux
 ```
 
