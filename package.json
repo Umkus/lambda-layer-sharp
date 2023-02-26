@@ -14,6 +14,11 @@
   "dependencies": {
     "sharp": "^0.31.3"
   },
+  "scripts": {
+    "postinstall": "npm run install-arm && npm run build",
+    "install-arm": "npm install --prefix /tmp/sharp --arch=arm64 --platform=linux sharp && cp -R /tmp/sharp/node_modules/sharp node_modules/",
+    "build": "node ./node_modules/webpack/bin/webpack.js"
+  },
   "engines": {
     "node": ">=14"
   },

@@ -9,6 +9,7 @@ on:
       - master
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -36,14 +37,7 @@ jobs:
           git show-ref --tags --quiet --verify -- "refs/tags/$sharp_version" || release_exists="false"
           echo "release_exists=$release_exists" >> $GITHUB_OUTPUT
       - name: Build
-        id: docker_build
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          tags: amazon-linux-sharp-layer:dev
-      - name: Copy artifacts
-        run: docker run -v "${{ github.workspace }}/dist":/dist amazon-linux-sharp-layer:dev
+        run: npm ci --arch=x64 --platform=linux
       - name: Create release
         uses: svenstaro/upload-release-action@v2
         with:

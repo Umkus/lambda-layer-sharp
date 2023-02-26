@@ -45,5 +45,6 @@ module.exports = {
   },
   externals: {
     './sharp-linux-x64.node': './build/Release/sharp-linux-x64.node',
+    './sharp-linux-arm64v8.node': './build/Release/sharp-linux-arm64v8.node',
   },
 };
