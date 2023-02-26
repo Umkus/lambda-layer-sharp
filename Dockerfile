@@ -1,4 +1,4 @@
-FROM lambci/lambda:build-nodejs12.x
+FROM public.ecr.aws/lambda/nodejs:18
 
 WORKDIR /build
 

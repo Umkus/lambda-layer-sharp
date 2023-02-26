@@ -30,11 +30,11 @@ jobs:
         id: vars
         run: |
           sharp_version="${{ fromJSON(steps.package_lock_json.outputs.packageLockJson).dependencies.sharp.version }}"
-          echo "::set-output name=sharp_version::$sharp_version"
+          echo "sharp_version=$sharp_version" >> $GITHUB_OUTPUT
 
           release_exists="true"
           git show-ref --tags --quiet --verify -- "refs/tags/$sharp_version" || release_exists="false"
-          echo "::set-output name=release_exists::$release_exists"
+          echo "release_exists=$release_exists" >> $GITHUB_OUTPUT
       - name: Build
         id: docker_build
         uses: docker/build-push-action@v4
