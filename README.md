@@ -18,17 +18,17 @@ A pre-built layer zip file is available on the [Releases page](../../releases), 
     ```
 1. Install dependencies:
     ```shell script
-    docker run -v "$PWD":/var/task lambci/lambda:build-nodejs12.x npm --no-optional --no-audit --progress=false install
+    docker run -v "$PWD":/var/task --entrypoint npm public.ecr.aws/lambda/nodejs:18 --no-audit --progress=false --arch=x64 --platform=linux ci
     ```
 1. Build the layer:
     ```shell script
-    docker run -v "$PWD":/var/task lambci/lambda:build-nodejs12.x node ./node_modules/webpack/bin/webpack.js
+    docker run -v "$PWD":/var/task --entrypoint node public.ecr.aws/lambda/nodejs:18 ./node_modules/webpack/bin/webpack.js
     ```
 1. Perform a smoke-test:
     ```shell script
-    docker run -w /var/task/dist/nodejs -v "$PWD":/var/task lambci/lambda:build-nodejs12.x node -e "console.log(require('sharp'))"
+    docker run -w /var/task/dist/nodejs -v "$PWD":/var/task --entrypoint node public.ecr.aws/lambda/nodejs:18 -e "console.log(require('sharp'))"
     ```
 1. Import created layer into your AWS account:
     ```shell script
-    aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs12.x
+    aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x
     ```
