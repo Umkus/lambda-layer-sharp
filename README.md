@@ -14,7 +14,13 @@ A pre-built layer zip file is available on the [Releases page](../../releases).
 
 You can import it into your AWS account throught the Lambda console or with the following command:
 ```shell
-aws lambda publish-layer-version --layer-name sharp --description "Sharp layer" --license-info "Apache License 2.0" --zip-file fileb://dist/sharp-layer.zip --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x --compatible-architectures x86_64 arm64
+aws lambda publish-layer-version \
+    --layer-name sharp \
+    --description "Sharp layer" \
+    --license-info "Apache License 2.0" \
+    --zip-file fileb://dist/sharp-layer.zip \
+    --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x \
+    --compatible-architectures x86_64 arm64
 ```
 
 # Building
