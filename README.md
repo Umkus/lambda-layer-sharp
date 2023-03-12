@@ -1,13 +1,13 @@
 # AWS Sharp layer
-This AWS lambda layer contains a pre-built [sharp](https://www.npmjs.com/package/sharp) npm library, so that you could "just use" it in your lambda code:
+This AWS lambda layer contains a latest pre-built vanilla [sharp](https://www.npmjs.com/package/sharp) npm library, so that you could "just use" it in your lambda code:
 
 ```javascript
 import sharp from 'sharp'
 // ...
 ```
 
-It holds only necessary files to minimize its weight (16Mb).
-It also supports all currently supported AWS lambda node runtimes (>=`nodejs14.x`) and architectures (`x86_64` and `arm64`).
+It contains only necessary files to minimize its weight (16Mb).
+It also supports all current AWS lambda node runtimes (>=`nodejs14.x`) and architectures (`x86_64` and `arm64`).
 
 # Getting
 A pre-built layer zip file is available on the [Releases page](../../releases).
@@ -24,9 +24,10 @@ aws lambda publish-layer-version \
 ```
 
 # Building
-Install dependencies (this will wipe your existing `node_modules/` directory):
+Simply run (this will wipe your existing `node_modules/` directory):
 ```shell
 npm ci --arch=x64 --platform=linux
 ```
 
 Build will be performed automatically upon deps installation.
+The resulted lambda layer zip file will be saved to `dist/` directory.
