@@ -3,10 +3,10 @@ FROM amazonlinux:latest
 RUN touch ~/.bashrc && chmod +x ~/.bashrc
 
 # Install the dependencies
-RUN yum -y install gcc44 gcc-c++ libgcc44 cmake wget findutils tar gzip zip
+RUN yum -y install gcc-c++ cmake wget findutils tar gzip zip
 
 # Node
-RUN curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_18.x | bash -
 RUN yum install nodejs -y
 
 # Confirm node installation
