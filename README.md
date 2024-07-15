@@ -19,7 +19,7 @@ aws lambda publish-layer-version \
     --description "Sharp layer" \
     --license-info "Apache License 2.0" \
     --zip-file fileb://dist/sharp-layer.zip \
-    --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x \
+    --compatible-runtimes nodejs14.x nodejs16.x nodejs18.x nodejs20.x \
     --compatible-architectures x86_64 arm64
 ```
 
